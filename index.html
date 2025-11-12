@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mapa Interactivo - Alojamiento Tres Lagos</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #f8f9fa;
+      margin: 0;
+    }
+    .map-container {
+      position: relative;
+      display: inline-block;
+    }
+    .map-image {
+      width: 90%;
+      max-width: 1000px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+    .info-box {
+      display: none;
+      position: absolute;
+      background: white;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      padding: 10px;
+      width: 220px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+      z-index: 10;
+    }
+    .click-area {
+      position: absolute;
+      cursor: pointer;
+      background: rgba(255, 255, 255, 0);
+      width: 3%;
+      height: 3%;
+      border-radius: 50%;
+      transition: background 0.2s, box-shadow 0.2s;
+    }
+    .click-area:hover {
+      background: rgba(0, 255, 0, 0.4);
+      box-shadow: 0 0 10px rgba(0, 255, 0, 0.8);
+    }
+  </style>
+</head>
+<body>
+  <h1>Mapa Interactivo de Alojamiento - Tres Lagos</h1>
+
+  <div class="map-container">
+    <img src="mapa.jpg" alt="Mapa Tres Lagos" class="map-image">
+
+    <!-- 1. Hostería Tres Lagos -->
+    <div class="click-area" style="top: 29.7%; left: 51.5%;"
+         onclick="showInfo(event, 'Hostería Tres Lagos', '011-67085932 / 011-59783425')"></div>
+
+    <!-- 2. Cabañas Huentru-Niyeu -->
+    <div class="click-area" style="top: 23.9%; left: 54.2%;"
+         onclick="showInfo(event, 'Cabañas Huentru-Niyeu', '2902-486375 / 2966-385079')"></div>
+
+    <!-- 3. Cabañas Demarnic -->
+    <div class="click-area" style="top: 36.5%; left: 51.1%;"
+         onclick="showInfo(event, 'Cabañas Demarnic', '2966-224833')"></div>
+
+    <!-- 4. Hospedaje Los 73 Malditos -->
+    <div class="click-area" style="top: 34.9%; left: 26.2%;"
+         onclick="showInfo(event, 'Hospedaje Los 73 Malditos', '388-6018866')"></div>
+
+    <!-- 5. Departamento Aiken -->
+    <div class="click-area" style="top: 25.9%; left: 60.9%;"
+         onclick="showInfo(event, 'Departamento Aiken', '2966-564279')"></div>
+
+    <!-- 6. Alquiler por Día Griselda -->
+    <div class="click-area" style="top: 29.7%; left: 46.3%;"
+         onclick="showInfo(event, 'Alquiler por Día Griselda', '2966-508421')"></div>
+
+    <div id="infoBox" class="info-box"></div>
+  </div>
+
+  <script>
+    function showInfo(event, nombre, telefono) {
+      const box = document.getElementById('infoBox');
+      box.style.display = 'block';
+      const rect = event.target.getBoundingClientRect();
+      const scrollY = window.scrollY || window.pageYOffset;
+      box.style.top = (rect.top + scrollY - 60) + 'px';
+      box.style.left = (rect.left + rect.width + 10) + 'px';
+      box.innerHTML = `<strong>${nombre}</strong><br>📞 ${telefono}`;
+    }
+
+    document.addEventListener('click', function(e) {
+      if (!e.target.classList.contains('click-area')) {
+        document.getElementById('infoBox').style.display = 'none';
+      }
+    });
+  </script>
+</body>
+</html>
