@@ -33,8 +33,6 @@
       z-index: 10;
       transform: translateX(-50%);
     }
-
-    /* Flecha del globo */
     .info-box::after {
       content: "";
       position: absolute;
@@ -70,27 +68,33 @@
 
     <!-- 1. Hostería Tres Lagos -->
     <div class="click-area" style="top: 29.7%; left: 51.5%;"
-         onclick="showInfo(event, 'Hostería Tres Lagos', '011-67085932 / 011-59783425')"></div>
+         onmouseenter="showInfo(event, 'Hostería Tres Lagos', '011-67085932 / 011-59783425')"
+         onmouseleave="hideInfo()"></div>
 
     <!-- 2. Cabañas Huentru-Niyeu -->
     <div class="click-area" style="top: 23.9%; left: 54.2%;"
-         onclick="showInfo(event, 'Cabañas Huentru-Niyeu', '2902-486375 / 2966-385079')"></div>
+         onmouseenter="showInfo(event, 'Cabañas Huentru-Niyeu', '2902-486375 / 2966-385079')"
+         onmouseleave="hideInfo()"></div>
 
     <!-- 3. Cabañas Demarnic -->
     <div class="click-area" style="top: 36.5%; left: 51.1%;"
-         onclick="showInfo(event, 'Cabañas Demarnic', '2966-224833')"></div>
+         onmouseenter="showInfo(event, 'Cabañas Demarnic', '2966-224833')"
+         onmouseleave="hideInfo()"></div>
 
-    <!-- 4. Hospedaje Los 73 Malditos -->
-    <div class="click-area" style="top: 34.9%; left: 26.2%;"
-         onclick="showInfo(event, 'Hospedaje Los 73 Malditos', '388-6018866')"></div>
+    <!-- 4. Hospedaje Los 73 Malditos (ajustado a la derecha) -->
+    <div class="click-area" style="top: 34.9%; left: 27.4%;"
+         onmouseenter="showInfo(event, 'Hospedaje Los 73 Malditos', '388-6018866')"
+         onmouseleave="hideInfo()"></div>
 
     <!-- 5. Departamento Aiken -->
     <div class="click-area" style="top: 25.9%; left: 60.9%;"
-         onclick="showInfo(event, 'Departamento Aiken', '2966-564279')"></div>
+         onmouseenter="showInfo(event, 'Departamento Aiken', '2966-564279')"
+         onmouseleave="hideInfo()"></div>
 
     <!-- 6. Alquiler por Día Griselda -->
     <div class="click-area" style="top: 29.7%; left: 46.3%;"
-         onclick="showInfo(event, 'Alquiler por Día Griselda', '2966-508421')"></div>
+         onmouseenter="showInfo(event, 'Alquiler por Día Griselda', '2966-508421')"
+         onmouseleave="hideInfo()"></div>
 
     <div id="infoBox" class="info-box"></div>
   </div>
@@ -103,18 +107,15 @@
       const clickRect = event.target.getBoundingClientRect();
       const scrollY = window.scrollY || window.pageYOffset;
 
-      // Mostrar caja arriba del ícono, centrada
       box.style.display = 'block';
       box.style.top = (clickRect.top + scrollY - rect.top - 80) + 'px';
       box.style.left = (clickRect.left - rect.left + clickRect.width / 2) + 'px';
       box.innerHTML = `<strong>${nombre}</strong><br>📞 ${telefono}`;
     }
 
-    document.addEventListener('click', function(e) {
-      if (!e.target.classList.contains('click-area')) {
-        document.getElementById('infoBox').style.display = 'none';
-      }
-    });
+    function hideInfo() {
+      document.getElementById('infoBox').style.display = 'none';
+    }
   </script>
 </body>
 </html>
